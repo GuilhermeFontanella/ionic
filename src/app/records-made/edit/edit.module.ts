@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { IonicModule } from '@ionic/angular';
 
@@ -14,7 +14,8 @@ import { TimePipe } from 'src/assets/pipes/time.pipe';
     CommonModule,
     FormsModule,
     IonicModule,
-    EditPageRoutingModule
+    EditPageRoutingModule,
+    ReactiveFormsModule
   ],
   declarations: [
     EditPage,

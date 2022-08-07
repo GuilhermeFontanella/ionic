@@ -116,8 +116,7 @@ export class RegisterPage implements OnInit {
   }
 
   cancel() {
-    this.modal.dismiss(null, 'cancel');
-    
+    this.modal.dismiss(null, 'cancel'); 
   }
 
   confirm() {

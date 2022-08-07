@@ -24,7 +24,7 @@
       </ion-label>
     </ion-row>
   </ion-item>
-  <ion-item detail (click)="selectedItem(d)">
+  <ion-item detail (click)="selectedItem(dataSelected.clockIn)">
     <ion-row>
       <ion-label>
         <ion-icon slot="start" name="log-in-outline" id="in" style="margin-right: 0.5rem;"></ion-icon>
@@ -32,7 +32,7 @@
       </ion-label>
     </ion-row>
   </ion-item>
-  <ion-item detail (click)="selectedItem(d)">
+  <ion-item detail (click)="selectedItem(dataSelected.clockOut)">
     <ion-row>
       <ion-label>
         <ion-icon slot="start" name="log-out-outline" id="out" style="margin-right: 0.5rem;"></ion-icon>
@@ -50,3 +50,43 @@
 
   </section>
 </ion-content>
+<section>
+  <ion-button expand="block" style="margin: 1rem;">
+    Save
+  </ion-button>
+</section>
+
+<ion-modal trigger="open-modal" (willDismiss)="onWillDismiss($event)">
+  <ng-template>
+    <ion-header>
+      <ion-toolbar>
+        <ion-buttons slot="start">
+          <ion-button (click)="cancel()">Cancel</ion-button>
+        </ion-buttons>
+        <ion-title>Register Attendance</ion-title>
+        <ion-buttons slot="end">
+          <ion-button (click)="confirm()" [strong]="true">Confirm</ion-button>
+        </ion-buttons>
+      </ion-toolbar>
+    </ion-header>
+    <ion-content class="ion-padding">
+        <ion-datetime
+          style="margin: auto;"
+          [value]="date"
+          [max]="maxDate"
+          [isDateEnabled]="isWeekday"
+          [showDefaultButtons]="true"
+          locale="pt-BR"
+        ></ion-datetime>
+    </ion-content>
+  </ng-template>
+<!-- </ion-modal>
+<ion-modal [keepContentsMounted]="true">
+  <ng-template>
+    <ion-datetime id="datetimeNow" style="display: none;" [(ngModel)]="dateNow" ngDefaultControl
+      [isDateEnabled]="isWeekday" [showDefaultButtons]="true" locale="en-US"></ion-datetime>
+    <ion-datetime id="datetimeNow" ngDefaultControl [isDateEnabled]="isWeekday"
+      [showDefaultButtons]="true" locale="en-US" [max]="maxDate"></ion-datetime>
+  </ng-template> -->
+
+</ion-modal>
