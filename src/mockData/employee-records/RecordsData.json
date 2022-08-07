@@ -1,0 +1,76 @@
+{
+    "employee123": [
+        {
+            "id": 1,
+            "idEmployee": 123,
+            "dateRegisterDone": "Tue, 26 Jul 2022 06:04:33 GMT-3",
+            "clockIn": "Tue, 26 Jul, 2022 08:01:59 GMT-3",
+            "clockOut": "Tue, 26 Jul, 2022 17:15:59 GMT-3",
+            "justification": "TESTE"
+        },
+        {
+            "id": 2,
+            "idEmployee": 123,
+            "dateRegisterDone": "Wed, 27 Jul 2022 06:04:33 GMT-3",
+            "clockIn": "Wed, 27 Jul, 2022 08:01:59 GMT-3",
+            "clockOut": "Wed, 27 Jul, 2022 14:01:59 GMT-3",
+            "justification": ""
+        },
+        {
+            "id": 3,
+            "idEmployee": 123,
+            "dateRegisterDone": "Sat, 30 Aug 2022 06:04:33 GMT-3",
+            "clockIn": "Thu, 28 Jul, 2022 08:01:59 GMT-3",
+            "clockOut": "Thu, 28 Jul, 2022 14:01:59 GMT-3",
+            "justification": ""
+        },
+        {
+            "id": 4,
+            "idEmployee": 123,
+            "dateRegisterDone": "Sun, 31 Aug 2022 06:04:33 GMT-3",
+            "clockIn": "Fri, 29 Jul, 2022 08:01:59 GMT-3",
+            "clockOut": "Fri, 29 Jul, 2022 14:01:59 GMT-3",
+            "justification": ""
+        },
+        {
+            "id": 5,
+            "idEmployee": 123,
+            "dateRegisterDone": "Sun, 07 Aug 2022 06:04:33 GMT-3",
+            "clockIn": "Mon, 01 Aug, 2022 08:01:59 GMT-3",
+            "clockOut": "Mon, 01 Aug, 2022 14:01:59 GMT-3",
+            "justification": ""
+        },
+        {
+            "id": 6,
+            "idEmployee": 123,
+            "dateRegisterDone": "Sat, 06 Aug 2022 06:04:33 GMT-3",
+            "clockIn": "Tue, 02 Aug, 2022 08:01:59 GMT-3",
+            "clockOut": "Tue, 02 Aug, 2022 14:01:59 GMT-3",
+            "justification": ""
+        },
+        {
+            "id": 7,
+            "idEmployee": 123,
+            "dateRegisterDone": "Fri, 05 Aug 2022 06:04:33 GMT-3",
+            "clockIn": "Wed, 03 Aug, 2022 08:01:59 GMT-3",
+            "clockOut": "Wed, 03 Aug, 2022 14:01:59 GMT-3",
+            "justification": ""
+        },
+        {
+            "id": 8,
+            "idEmployee": 123,
+            "dateRegisterDone": "Thu, 04 Aug 2022 06:04:33 GMT-3",
+            "clockIn": "Thu, 04 Aug, 2022 08:01:59 GMT-3",
+            "clockOut": "Thu, 04 Aug, 2022 14:01:59 GMT-3",
+            "justification": ""
+        },
+        {
+            "id": 9,
+            "idEmployee": 123,
+            "dateRegisterDone": "Wed, 03 Aug 2022 06:04:33 GMT-3",
+            "clockIn": "Fri, 05 Aug, 2022 08:01:59 GMT-3",
+            "clockOut": "Fri, 05 Aug, 2022 14:01:59 GMT-3",
+            "justification": ""
+        }
+    ]
+}

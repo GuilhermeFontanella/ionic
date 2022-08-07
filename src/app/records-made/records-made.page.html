@@ -1,0 +1,77 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>{{ folder }}</ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Records Made</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-accordion-group #accordionGroup>
+    <ion-accordion value="first" >
+      <ion-item slot="header" color="light">
+        <ion-label>Filter Period</ion-label>
+      </ion-item>
+      <div class="ion-padding" slot="content">
+        <ion-list>
+          <ion-item (click)="filter(7)">
+            <ion-label>Last 7 days</ion-label>
+          </ion-item>
+          <ion-item  (click)="filter(15)">
+            <ion-label>Last 15 days</ion-label>
+          </ion-item>
+          <ion-item  (click)="filter(30)">
+            <ion-label>Last 30 days</ion-label>
+          </ion-item>
+          <ion-item  (click)="filter(60)">
+            <ion-label>Last 60 days</ion-label>
+          </ion-item>
+          <ion-item  (click)="filter(90)">
+            <ion-label>Last 90 days</ion-label>
+          </ion-item>
+          <ion-item (click)="filter(0)">
+            <ion-label>Show All registers</ion-label>
+          </ion-item>
+        </ion-list>
+      </div>
+    </ion-accordion>
+  </ion-accordion-group>
+
+  <section *ngIf="showOriginalData">
+    <ion-item detail *ngFor="let d of data.employee123" (click)="selectedItem(d)">
+      <ion-row style="margin: 0.5rem;">
+        <ion-label>
+          <ion-icon slot="start" name="log-in-outline" id="in" style="margin-right: 0.5rem;"></ion-icon>
+          {{d.clockIn | date: 'medium'}}
+        </ion-label>
+        <ion-label style="margin-top: 0.25rem;">
+          <ion-icon slot="start" name="log-out-outline" id="out" style="margin-right: 0.5rem;"></ion-icon>
+        {{d.clockOut | date: 'medium'}}
+        </ion-label>
+      </ion-row>
+    </ion-item>
+  </section>
+
+  <section *ngIf="showDataFiltered">
+    <ion-item detail *ngFor="let d of dataFiltered" (click)="selectedItem(d)">
+      <ion-row style="margin: 0.5rem;">
+        <ion-label>
+          <ion-icon slot="start" name="log-in-outline" id="in" style="margin-right: 0.5rem;"></ion-icon>
+          {{d.clockIn | date: 'medium'}}
+        </ion-label>
+        <ion-label style="margin-top: 0.25rem;">
+          <ion-icon slot="start" name="log-out-outline" id="out" style="margin-right: 0.5rem;"></ion-icon>
+        {{d.clockOut | date: 'medium'}}
+        </ion-label>
+      </ion-row>
+    </ion-item>
+  </section>
+
+</ion-content>
+

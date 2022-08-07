@@ -1,0 +1,52 @@
+<ion-header translucent>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/records-made"></ion-back-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Edit Register Done</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-item-divider>
+    <ion-label>General Information</ion-label>
+  </ion-item-divider>
+  <ion-item>
+    <ion-row>
+      <ion-label>
+        <ion-icon slot="start" name="time-outline" style="margin-right: 0.5rem;"></ion-icon>
+        <span>Total Working time: {{totalHours}}</span>
+      </ion-label>
+    </ion-row>
+  </ion-item>
+  <ion-item detail (click)="selectedItem(d)">
+    <ion-row>
+      <ion-label>
+        <ion-icon slot="start" name="log-in-outline" id="in" style="margin-right: 0.5rem;"></ion-icon>
+        <span>{{dataSelected.clockIn | date: 'medium'}}</span>
+      </ion-label>
+    </ion-row>
+  </ion-item>
+  <ion-item detail (click)="selectedItem(d)">
+    <ion-row>
+      <ion-label>
+        <ion-icon slot="start" name="log-out-outline" id="out" style="margin-right: 0.5rem;"></ion-icon>
+        <span>{{dataSelected.clockOut | date: 'medium'}}</span>
+      </ion-label>
+    </ion-row>
+  </ion-item>
+  <section>
+    <ion-item-divider>
+      <ion-label>Justification</ion-label>
+    </ion-item-divider>
+    <ion-item>
+      <ion-textarea placeholder="Enter more information here..." [(ngModel)]="dataSelected.justification"></ion-textarea>
+    </ion-item>
+
+  </section>
+</ion-content>
