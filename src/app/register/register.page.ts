@@ -148,7 +148,7 @@ export class RegisterPage implements OnInit {
         this.listData.push({
           registrationDate: new Date(),
           employeeId,
-          clockIn,
+          clockIn: null,
           clockOut
         })
         this.showToast(
