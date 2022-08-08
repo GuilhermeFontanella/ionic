@@ -34,6 +34,30 @@
     </ion-button>
   </section>
 </ion-content>
+
+<ion-content>
+  <section *ngIf="listData">
+    <div *ngFor="let d of listData">
+      <ion-item *ngIf="d.clockIn">
+        <ion-row style="margin: 0.5rem;">
+          <ion-label>
+              <ion-icon  slot="start" name="log-in-outline" id="in" style="margin-right: 0.5rem;"></ion-icon>
+              {{d.clockIn | date: 'medium'}}
+          </ion-label>
+        </ion-row>
+      </ion-item>
+      <ion-item *ngIf="d.clockOut">
+        <ion-row style="margin: 0.5rem;">
+          <ion-label>          
+              <ion-icon slot="start" name="log-out-outline" id="out" style="margin-right: 0.5rem;"></ion-icon>
+              {{d.clockOut | date: 'medium'}}
+          </ion-label>
+        </ion-row>
+      </ion-item>
+    </div>
+  </section>
+</ion-content>
+
 <ion-modal trigger="open-modal" (willDismiss)="onWillDismiss($event)">
   <ng-template>
     <ion-header>
@@ -48,17 +72,43 @@
       </ion-toolbar>
     </ion-header>
     <ion-content class="ion-padding">
-      <ion-row style="display: flex; flex-direction: row; align-items: center;">
-        <ion-datetime-button style="width: 100%; margin-top: 5rem;" datetime="datetimeNow"></ion-datetime-button>
-      </ion-row>
+        <ion-row style="display: flex; flex-direction: row; align-items: center; justify-content: center;">
+            <ion-card-header style="margin: auto;">
+              <ion-card-title>{{dateNow | date: 'MMM/dd/YYYY h:mm a'}}</ion-card-title>
+            </ion-card-header>
+          </ion-row>
+          <ion-button expand="block" id="click-trigger">
+            <ion-icon name="create-outline"></ion-icon>
+          </ion-button>
+          <ion-popover trigger="click-trigger" triggerAction="click" size="cover">
+            <ng-template>
+              <ion-content class="ion-padding">
+                <ion-datetime id="datetimeNow" ngDefaultControl [isDateEnabled]="isWeekday"
+                [showDefaultButtons]="true" locale="en-US" [max]="maxDate" (ionChange)="setNewDate($event)"></ion-datetime>
+              </ion-content>
+            </ng-template>
+          </ion-popover>
+          <ion-card *ngIf="justificative">
+            <ion-card-header>
+              <ion-card-title>Justificative</ion-card-title>
+            </ion-card-header>
+            <ion-card-content>
+              <ion-item>
+                <section>
+                  <ion-item>
+                    <ion-textarea placeholder="Enter your justificative..." [(ngModel)]="textJustificative" autofocus="true" maxLength="300" minLength="3" required="true"></ion-textarea>
+                  </ion-item>
+                </section>
+              </ion-item>
+            </ion-card-content>
+          </ion-card>
     </ion-content>
   </ng-template>
 </ion-modal>
-<ion-modal [keepContentsMounted]="true">
+<!-- <ion-modal [keepContentsMounted]="true">
   <ng-template>
     <ion-datetime id="datetimeNow" style="display: none;" [(ngModel)]="dateNow" ngDefaultControl
       [isDateEnabled]="isWeekday" [showDefaultButtons]="true" locale="en-US"></ion-datetime>
-    <ion-datetime id="datetimeNow" [(ngModel)]="newDate" ngDefaultControl [isDateEnabled]="isWeekday"
-      [showDefaultButtons]="true" locale="en-US" [max]="maxDate" (ionChange)="setNewDate($event)"></ion-datetime>
+    
   </ng-template>
-</ion-modal>
+</ion-modal> -->
