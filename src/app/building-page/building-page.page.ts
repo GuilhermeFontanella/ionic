@@ -9,7 +9,7 @@ export class BuildingPagePage implements OnInit {
 
   constructor() { }
 
-  ngOnInit() {
+  ngOnInit(): void {
   }
 
 }

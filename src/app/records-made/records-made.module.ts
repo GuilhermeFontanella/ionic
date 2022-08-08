@@ -4,8 +4,6 @@ import { FormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
 import { RecordsMadePageRoutingModule } from './records-made-routing.module';
 import { RecordsMadePage } from './records-made.page';
-import { InputMaskModule } from 'primeng/inputmask';
-
 
 @NgModule({
   imports: [
@@ -13,7 +11,6 @@ import { InputMaskModule } from 'primeng/inputmask';
     FormsModule,
     IonicModule,
     RecordsMadePageRoutingModule,
-    InputMaskModule
   ],
   declarations: [RecordsMadePage]
 })

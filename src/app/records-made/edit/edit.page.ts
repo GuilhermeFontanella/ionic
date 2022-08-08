@@ -11,18 +11,16 @@ import { AlertController } from '@ionic/angular';
 })
 export class EditPage implements OnInit {
   @ViewChild(IonModal) modal: IonModal;
-  message = 'This modal example uses triggers to automatically open a modal when the button is clicked.';
+  message = '';
   dataSelected: any;
   clockIn: any;
   clockOut: any;
   totalHours: any;
-  newDate: any;
   date: any;
   maxDate = new Date().toISOString();
   isWeekday = (dateString: string) => {
     const date = new Date(dateString);
     const utcDay = date.getUTCDay();
-
     /**
      * Date will be enabled if it is not
      * Sunday or Saturday
@@ -37,14 +35,21 @@ export class EditPage implements OnInit {
   ) { }
 
   ngOnInit() {
+    /**
+     * Return data from route and set to array,
+     * setTimeOut simulates an async func.
+     */
     this.dataSelected = this.route.snapshot.params;
     setTimeout(() => {
       this.calculateTotalHours();
-      console.log(this.totalHours)
     }, 300);
   }
 
-  calculateTotalHours() {
+  /**
+   * get data of entrance and go out and do the math
+   * @returns string
+   */
+  calculateTotalHours(): string {
     let hours;
     let mins;
     this.totalHours = 0;
@@ -63,38 +68,38 @@ export class EditPage implements OnInit {
     return this.totalHours = `${hours}${mins}`;
   }
 
-  selectedItem(d) {
+  /**
+   * get data from item selected on the list
+   * @param d
+   */
+  selectedItem(d): void {
     let dateSelected;
     this.showModal();
     this.presentAlert(
-      'Important',
-      '',
-      "If you change this register, you'll must justificate the edition",
-      ['OK']
+      'Important', '', "If you change this register, you'll must justificate the edition", ['OK']
     );
     dateSelected = Date.parse(d);
-    
     this.date = new Date(dateSelected).toISOString();  
     this.date = this.date.toString();
   }
 
-  showModal() {
+  showModal(): void {
     this.modal.present();
   }
 
-  cancel() {
+  cancel(): void {
     this.modal.dismiss(null, 'cancel'); 
   }
 
-  confirm() {
+  confirm(): void {
     this.modal.dismiss('this.name', 'confirm');
     this.saveData();
-    // console.log(this.form.value)
-    // console.log(this.dateNow);
-    console.log(this.newDate);
   }
 
-  async saveData() {
+  /**
+   * do nothig, but in real life would communicate with API and POST data
+   */
+  async saveData(): Promise<any> {
     const toast = await this.toastController.create({
       color: 'dark',
       duration: 3000,
@@ -104,7 +109,7 @@ export class EditPage implements OnInit {
     await toast.present();
   }
 
-  onWillDismiss(event: Event) {
+  onWillDismiss(event: Event): void {
     const ev = event as CustomEvent<OverlayEventDetail<string>>;
     if (ev.detail.role === 'confirm') {
       this.message = `Hello, ${ev.detail.data}!`;
@@ -112,18 +117,11 @@ export class EditPage implements OnInit {
   }
 
   async presentAlert(
-    header: string, 
-    subHeader: string, 
-    message: string, 
-    buttons: any[]
+    header: string, subHeader: string, message: string, buttons: any[]
   ) {
-    const alert = await this.alert.create({
-      header,
-      subHeader,
-      message,
-      buttons,
-    });
-
+    const alert = await this.alert.create(
+      { header, subHeader, message, buttons }
+    );
     await alert.present();
   }
 }

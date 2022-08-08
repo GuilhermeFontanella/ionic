@@ -5,13 +5,11 @@
     </ion-buttons>
   </ion-toolbar>
 </ion-header>
-
 <ion-header>
   <ion-toolbar>
     <ion-title>Edit Register Done</ion-title>
   </ion-toolbar>
 </ion-header>
-
 <ion-content>
   <ion-item-divider>
     <ion-label>General Information</ion-label>
@@ -47,7 +45,6 @@
     <ion-item>
       <ion-textarea placeholder="Enter more information here..." [(ngModel)]="dataSelected.justification"></ion-textarea>
     </ion-item>
-
   </section>
 </ion-content>
 <section>
@@ -55,7 +52,6 @@
     Save
   </ion-button>
 </section>
-
 <ion-modal trigger="open-modal" (willDismiss)="onWillDismiss($event)">
   <ng-template>
     <ion-header>
@@ -80,13 +76,4 @@
         ></ion-datetime>
     </ion-content>
   </ng-template>
-<!-- </ion-modal>
-<ion-modal [keepContentsMounted]="true">
-  <ng-template>
-    <ion-datetime id="datetimeNow" style="display: none;" [(ngModel)]="dateNow" ngDefaultControl
-      [isDateEnabled]="isWeekday" [showDefaultButtons]="true" locale="en-US"></ion-datetime>
-    <ion-datetime id="datetimeNow" ngDefaultControl [isDateEnabled]="isWeekday"
-      [showDefaultButtons]="true" locale="en-US" [max]="maxDate"></ion-datetime>
-  </ng-template> -->
-
 </ion-modal>

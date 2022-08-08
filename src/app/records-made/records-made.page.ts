@@ -10,10 +10,14 @@ import { IonAccordionGroup, LoadingController } from '@ionic/angular';
 })
 export class RecordsMadePage implements OnInit {
   @ViewChild('accordionGroup', { static: true }) accordionGroup: IonAccordionGroup;
+  /**
+   * data from mock data json
+   */
   data = data;
   dataFiltered;
   showOriginalData: boolean = true;
   showDataFiltered: boolean = false;
+  showHtml: boolean = false;
 
   constructor(
     private router: Router,
@@ -21,15 +25,29 @@ export class RecordsMadePage implements OnInit {
     ) {
   }
 
-  ngOnInit() {    
+  ngOnInit(): void { 
+    this.showLoading();
+    /**
+     * simulating time between requisition and response from API
+     */
+    setTimeout(() => {
+      this.showHtml = true;
+    }, 1500)   
   }
 
-  selectedItem(d) {
+  /**
+   * gets selected item and redirects to edit page passing the selected item as param in the route.
+   * @param d 
+   */
+  selectedItem(d): void {
     this.router.navigate([`/records-made/edit/${d.id}`, d]);
-    console.log(d);
   }
 
-  filter(period: number) {
+  /**
+   * when user select an option on accordion it triggers this func.
+   * @param period 
+   */
+  filter(period: number): void {
     // SIMULANDO UMA REQ AO BD
     this.showOriginalData = false;
     this.showDataFiltered = false;
@@ -42,7 +60,7 @@ export class RecordsMadePage implements OnInit {
     }, 1000);
   }
 
-  async showLoading() {
+  async showLoading(): Promise<any> {
     const loading = await this.loadingController.create({
       message: 'Loading...',
       duration: 1000,

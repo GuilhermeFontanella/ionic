@@ -12,7 +12,7 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
+<ion-content *ngIf="showHtml">
   <ion-accordion-group #accordionGroup>
     <ion-accordion value="first" >
       <ion-item slot="header" color="light">
@@ -42,7 +42,6 @@
       </div>
     </ion-accordion>
   </ion-accordion-group>
-
   <section *ngIf="showOriginalData">
     <ion-item detail *ngFor="let d of data.employee123" (click)="selectedItem(d)">
       <ion-row style="margin: 0.5rem;">
@@ -57,7 +56,6 @@
       </ion-row>
     </ion-item>
   </section>
-
   <section *ngIf="showDataFiltered">
     <ion-item detail *ngFor="let d of dataFiltered" (click)="selectedItem(d)">
       <ion-row style="margin: 0.5rem;">
@@ -72,6 +70,5 @@
       </ion-row>
     </ion-item>
   </section>
-
 </ion-content>
 
