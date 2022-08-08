@@ -18,6 +18,10 @@ const routes: Routes = [
   {
     path: 'records-made',
     loadChildren: () => import('./records-made/records-made.module').then( m => m.RecordsMadePageModule)
+  },
+  {
+    path: 'building-page',
+    loadChildren: () => import('./building-page/building-page.module').then( m => m.BuildingPagePageModule)
   }
 ];
 
