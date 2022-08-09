@@ -10,6 +10,7 @@ import {
 } from '@ionic/angular';
 import { OverlayEventDetail } from '@ionic/core/components';
 import { ListData } from 'src/shared/models/ListData.model';
+import { Task } from 'src/shared/models/Task.model';
 
 @Component({
   selector: 'app-register',
@@ -38,6 +39,24 @@ export class RegisterPage implements OnInit {
   listData: ListData[] = [];
   justificative: boolean = false;
   textJustificative: string;
+  tasks = [
+    {
+        id: 1,
+        name: 'Coding',
+        projectCode: '123ABC'
+    },
+    {
+        id: 2,
+        name: 'Meetings',
+        projectCode: '123ABC'
+    },
+    {
+        id: 3,
+        name: 'Daily Meetings',
+        projectCode: '123ABC'
+    }
+  ];
+  taskSelected: number = 0;
   
 
   constructor(
@@ -62,20 +81,40 @@ export class RegisterPage implements OnInit {
   }
 
   async register(): Promise<any> {
-    const actionSheet = await this.actionSheetController.create({
-      header: 'What do you want to add?',
-      cssClass: 'my-custom-class',
-      buttons: [
-        { text: 'Clock-in register', icon: 'time', handler: () =>  this.showModal() }, 
-        { text: 'Abscence', icon: 'close-circle', data: 10, handler: () =>  this.showModal()  }, 
-        { text: 'Off work', icon: 'game-controller', data: 'Data value', handler: () =>  this.showModal()  }, 
-        { text: 'Holiday',  icon: 'bed', handler: () => this.showModal() },
-        { text: 'Vacation', icon: 'airplane', handler: () =>  this.showModal() }, 
-        { text: 'Cancel', icon: '', role: 'cancel', handler: () => {} }
-      ]
-    });
-    await actionSheet.present();
-    const { role, data } = await actionSheet.onDidDismiss();
+    if (this.listData.length === 2) {
+      this.presentAlert(
+        'Warning', 
+        'You already have two registers today!', 
+        "You can't register Time and Attendance no more today... go get some rest!", 
+        ['Ok']
+      );
+      return;
+    } else if (this.listData.length === 1) {
+      const actionSheet = await this.actionSheetController.create({
+        header: 'What do you want to add?',
+        cssClass: 'my-custom-class',
+        buttons: [
+          { text: 'Clock-out register', icon: 'time', handler: () =>  this.showModal() }, 
+        ]
+      });
+      await actionSheet.present();
+      const { role, data } = await actionSheet.onDidDismiss();
+    } else if (this.listData.length === 0) {
+      const actionSheet = await this.actionSheetController.create({
+        header: 'What do you want to add?',
+        cssClass: 'my-custom-class',
+        buttons: [
+          { text: 'Clock-in register', icon: 'time', handler: () =>  this.showModal() }, 
+          { text: 'Abscence', icon: 'close-circle', data: 10, handler: () =>  this.showModal()  }, 
+          { text: 'Off work', icon: 'game-controller', data: 'Data value', handler: () =>  this.showModal()  }, 
+          { text: 'Holiday',  icon: 'bed', handler: () => this.showModal() },
+          { text: 'Vacation', icon: 'airplane', handler: () =>  this.showModal() }, 
+          { text: 'Cancel', icon: '', role: 'cancel', handler: () => {} }
+        ]
+      });
+      await actionSheet.present();
+      const { role, data } = await actionSheet.onDidDismiss();
+    }
   }
 
   async showToast(color: string, duration: number, icon: string, message: string): Promise<any> {
@@ -97,7 +136,8 @@ export class RegisterPage implements OnInit {
         registrationDate: new Date(),
         employeeId: employeeId,
         clockIn: this.form.get('dateSelected')?.value ? this.form.get('dateSelected')?.value : new Date(),
-        clockOut: null
+        clockOut: null,
+        taskId: this.taskSelected
       })
       timeDiff = Date.parse(this.form.get('dateSelected')?.value); 
       this.showToast(
@@ -123,7 +163,8 @@ export class RegisterPage implements OnInit {
           registrationDate: new Date(),
           employeeId,
           clockIn: null,
-          clockOut
+          clockOut,
+          taskId: this.taskSelected
         })
         this.showToast(
           'dark',
@@ -140,7 +181,8 @@ export class RegisterPage implements OnInit {
           employeeId,
           clockIn: null,
           clockOut: this.form.get('dateSelected').value ? this.form.get('dateSelected')?.value : new Date(),
-          justificative: this.textJustificative
+          justificative: this.textJustificative,
+          taskId: this.taskSelected
         })
         this.showToast(
           'dark',
@@ -178,7 +220,13 @@ export class RegisterPage implements OnInit {
   }
 
   confirm(): void {
-    this.saveData();
+    if (this.taskSelected) {
+      this.saveData();
+    } else {
+      this.presentAlert(
+        'Alert', 'You must select one task', 'Please, select one task', ['Ok']
+      );
+    }
   }
 
   onWillDismiss(event: Event): void {

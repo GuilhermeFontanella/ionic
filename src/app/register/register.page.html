@@ -89,6 +89,15 @@
               </ion-content>
             </ng-template>
           </ion-popover>
+          <section style="margin-top: 2rem;">
+            <ion-list>
+              <ion-item>
+                <ion-select interface="action-sheet" placeholder="Please select one task" [(ngModel)]="taskSelected" [disabled]="taskSelected">
+                  <ion-select-option value="{{task.id}}" *ngFor="let task of tasks">{{task.name}}</ion-select-option>
+                </ion-select>
+              </ion-item>
+            </ion-list>
+          </section>
           <ion-card *ngIf="justificative">
             <ion-card-header>
               <ion-card-title>Justificative</ion-card-title>

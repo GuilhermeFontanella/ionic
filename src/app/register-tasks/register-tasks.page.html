@@ -1,0 +1,87 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>{{ folder }}</ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Manage Tasks</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>In this page you can manage your tasks</ion-card-title>
+    </ion-card-header>
+  
+    <ion-card-content>
+      <p>Pressing the buttons bellow you can register a new task or select one of them to edit.</p>
+      <p>You need to set a name for the taks and the project's code.</p>
+      <p>To delete any task you just need select the task and press the delete button.</p>
+    </ion-card-content>
+  </ion-card>
+
+  <section>
+    <ion-button expand="block" (click)="addNewTask()" style="margin: 1rem;" color="success">
+            <ion-icon slot="start" name="add-outline" id="in" style="margin-right: 0.5rem;"></ion-icon>
+            Add new Task
+          </ion-button>
+  </section>
+
+  <section>
+    <ion-item detail *ngFor="let d of data" (click)="selectedItem(d)">
+      <ion-row style="margin: 0.5rem;">
+        <ion-label>
+          <ion-icon slot="start" name="document-text-outline" id="in" style="margin-right: 0.5rem;"></ion-icon>
+          {{d.name}}
+        </ion-label>
+      </ion-row>
+    </ion-item>
+  </section>
+</ion-content>
+
+<ion-modal trigger="open-modal" (willDismiss)="onWillDismiss($event)">
+  <ng-template>
+    <ion-header>
+      <ion-toolbar>
+        <ion-buttons slot="start">
+          <ion-button (click)="cancel()">Cancel</ion-button>
+        </ion-buttons>
+        <ion-title>
+          <span *ngIf="!newTask">{{taskSelected?.name}} - COD:{{taskSelected?.projectCode}}</span>
+          <span *ngIf="newTask">NEW TASK</span>
+        </ion-title>
+        <ion-buttons slot="end">
+          <ion-button (click)="confirm()" [strong]="true">Confirm</ion-button>
+        </ion-buttons>
+      </ion-toolbar>
+    </ion-header>
+    <ion-content class="ion-padding">
+      <form [formGroup]="form">
+        <ion-item style="margin-bottom: 1rem;">
+          <ion-label position="stacked">Task name</ion-label>
+          <ion-input formControlName="name" minLength="3" maxLength="10" required></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label position="stacked">Project Code</ion-label>
+          <ion-input formControlName="projectCode" minLength="3" maxLength="10" required></ion-input>
+        </ion-item>
+        <section>
+          <ion-button expand="block" (click)="register()" style="margin: 1rem;"
+            [disabled]="!form.valid || !form.dirty" color="success">
+            <ion-icon slot="start" name="save-outline" id="in" style="margin-right: 0.5rem;"></ion-icon>
+            Save
+          </ion-button>
+          <ion-button expand="block" (click)="askFordelete()" style="margin: 1rem;" color="danger" [disabled]="newTask">
+            <ion-icon slot="start" name="trash-outline" id="in" style="margin-right: 0.5rem;"></ion-icon>
+            Delete
+          </ion-button>
+        </section>
+      </form>
+    </ion-content>
+  </ng-template>
+</ion-modal>

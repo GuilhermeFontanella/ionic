@@ -22,6 +22,10 @@ const routes: Routes = [
   {
     path: 'building-page',
     loadChildren: () => import('./building-page/building-page.module').then( m => m.BuildingPagePageModule)
+  },
+  {
+    path: 'register-tasks',
+    loadChildren: () => import('./register-tasks/register-tasks.module').then( m => m.RegisterTasksPageModule)
   }
 ];
 
